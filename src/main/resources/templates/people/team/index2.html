@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Команды</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<h1>Команды</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/people">Люди</a></li>
+        <li class="nav-item">
+            <a class="nav-link" href="/people/sweet">Конфеты</a></li>
+        <li class="nav-item">
+            <a class="nav-link" href="/people/animal">Животные</a></li>
+        <li class="nav-item">
+            <a class="nav-link" href="/people/fish">Рыбы</a></li>
+    </ul>
+</nav>
+<div th:each="team : ${team}" th:if="${team.getName() != null || team.getLeague() != null || team.getType() != null}">
+    <a th:href="@{/people/team/{id}(id=${team.getId()})}">
+        <p th:text="${'Название:' +team.getName() + ' ' + 'Тип' +team.getType() + ' ' + 'Лига:'+team.getLeague}"></p></a>
+</div>
+<br/>
+<hr/>
+<a href="/people/team/new">Добавить команду</a>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Люди</title>
+</head>
+<body>
+<h1>Люди</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/people/team">Команды</a> </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/people/animal">Животные</a></li>
+        <li class="nav-item">
+            <a class="nav-link" href="/people/fish">Рыбы</a></li>
+        <li class="nav-item">
+            <a class="nav-link" href="/people/sweet">Конфеты</a></li>
+    </ul>
+</nav>
+<div th:each="person : ${people}" th:if="${person.getSurname() != null || person.getName() != null || person.getPatronic() != null}">
+    <a th:href="@{/people/{id}(id=${person.getId()})}">
+        <p th:text="${'Имя:'+ person.getName() + ' ' + 'Фамилия: ' + person.getSurname() + ' ' + 'Отчество: '+ person.getPatronic()}"></p></a>
+</div>
+<br/>
+<hr/>
+<a href="/people/new">Добавить человека</a>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

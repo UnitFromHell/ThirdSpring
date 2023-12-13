@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Конфета</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 th:text="${sweet.getName()}"></h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">ID: <span th:text="${sweet.getId()}"></span></h5>
+            <p class="card-text">Наименование: <span th:text="${sweet.getName()}"></span></p>
+            <p class="card-text">Количество: <span th:text="${sweet.getKolvo()}"></span></p>
+            <p class="card-text">Тип: <span th:text="${sweet.getType()}"></span></p>
+            <a th:href="@{/people/sweet/{id}/edit(id=${sweet.getId()})}" class="btn btn-primary">Изменить</a>
+            <form th:method="POST" th:action="@{/people/sweet/{id}(id=${sweet.getId()})}">
+                <input type="hidden" name="_method" value="DELETE" />
+                <input type="submit" value="Удалить!" class="btn btn-danger">
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
