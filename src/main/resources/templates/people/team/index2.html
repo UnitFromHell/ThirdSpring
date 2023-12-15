@@ -19,6 +19,10 @@
             <a class="nav-link" href="/people/fish">Рыбы</a></li>
     </ul>
 </nav>
+<form th:action="@{/people/team/search}" method="get">
+    <input type="text" name="name" placeholder="Введите название команды для поиска">
+    <button type="submit">Искать</button>
+</form>
 <div th:each="team : ${team}" th:if="${team.getName() != null || team.getLeague() != null || team.getType() != null}">
     <a th:href="@{/people/team/{id}(id=${team.getId()})}">
         <p th:text="${'Название:' +team.getName() + ' ' + 'Тип' +team.getType() + ' ' + 'Лига:'+team.getLeague}"></p></a>

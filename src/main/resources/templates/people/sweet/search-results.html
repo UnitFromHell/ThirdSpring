@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Результаты поиска</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Результаты поиска</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Kolvo</th>
+            <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sweet : ${searchResults}">
+            <td th:text="${sweet.id}"></td>
+            <td th:text="${sweet.name}"></td>
+            <td th:text="${sweet.kolvo}"></td>
+            <td th:text="${sweet.type}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="http://localhost:8080/people/sweet" class="btn btn-primary">Назад</a>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -12,8 +12,8 @@
         <div class="card-body">
             <h5 class="card-title">ID: <span th:text="${person.getId()}"></span></h5>
             <p class="card-text">Имя: <span th:text="${person.getName()}"></span></p>
-            <p class="card-text">Фамилия: <span th:text="${person.getSurname()}"></span></p>
-            <p class="card-text">Отчество: <span th:text="${person.getPatronic()}"></span></p>
+            <p class="card-text">Возраст: <span th:text="${person.getAge()}"></span></p>
+            <p class="card-text">Емейл: <span th:text="${person.getEmail()}"></span></p>
             <a th:href="@{/people/{id}/edit(id=${person.getId()})}" class="btn btn-primary">Изменить</a>
             <form th:method="POST" th:action="@{/people/{id}(id=${person.getId()})}">
                 <input type="hidden" name="_method" value="DELETE" />

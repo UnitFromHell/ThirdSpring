@@ -13,14 +13,17 @@
         <div class="form-group">
             <label for="name">Введите название</label>
             <input type="text" th:field="*{name}" class="form-control" id="name">
+            <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
         </div>
         <div class="form-group">
             <label for="kolvo">Введите кол-во</label>
             <input type="text" th:field="*{kolvo}" class="form-control" id="kolvo">
+            <div style="color:red" th:if="${#fields.hasErrors('kolvo')}" th:errors="*{kolvo}">Kolvo Error</div>
         </div>
         <div class="form-group">
             <label for="type">Введите вид</label>
             <input type="text" th:field="*{type}" class="form-control" id="type">
+            <div style="color:red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Type Error</div>
         </div>
         <button type="submit" class="btn btn-primary">Изменить!</button>
     </form>

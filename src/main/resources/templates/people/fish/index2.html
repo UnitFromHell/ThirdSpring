@@ -19,6 +19,10 @@
             <a class="nav-link" href="/people/sweet">Конфеты</a></li>
     </ul>
 </nav>
+<form th:action="@{/people/fish/search}" method="get">
+    <input type="text" name="name" placeholder="Введите Имя для поиска">
+    <button type="submit">Искать</button>
+</form>
 <div th:each="fish : ${fish}" th:if="${fish.getName() != null || fish.getYears() != 0 || fish.getType() != null}">
     <a th:href="@{/people/fish/{id}(id=${fish.getId()})}">
         <p th:text="${'Имя:'+fish.getName() + ' ' + 'Возраст:'+fish.getYears() + ' ' + 'Тип:'+fish.getType}"></p></a>

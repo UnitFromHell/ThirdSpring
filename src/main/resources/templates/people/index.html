@@ -19,9 +19,13 @@
             <a class="nav-link" href="/people/sweet">Конфеты</a></li>
     </ul>
 </nav>
-<div th:each="person : ${people}" th:if="${person.getSurname() != null || person.getName() != null || person.getPatronic() != null}">
+<form th:action="@{/people/search}" method="get">
+    <input type="text" name="name" placeholder="Введите имя для поиска">
+    <button type="submit">Искать</button>
+</form>
+<div th:each="person : ${people}" th:if="${person.getAge() != 0 || person.getName() != null || person.getEmail() != null}">
     <a th:href="@{/people/{id}(id=${person.getId()})}">
-        <p th:text="${'Имя:'+ person.getName() + ' ' + 'Фамилия: ' + person.getSurname() + ' ' + 'Отчество: '+ person.getPatronic()}"></p></a>
+        <p th:text="${'Имя:'+ person.getName() + ' ' + 'Возраст: ' + person.getAge() + ' ' + 'Емейл: '+ person.getEmail()}"></p></a>
 </div>
 <br/>
 <hr/>

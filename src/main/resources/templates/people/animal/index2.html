@@ -20,6 +20,10 @@
         </li>
     </ul>
 </nav>
+<form th:action="@{/people/animal/search}" method="get">
+    <input type="text" name="name" placeholder="Введите Имя для поиска">
+    <button type="submit">Искать</button>
+</form>
 <div th:each="animal : ${animal}" th:if="${animal.getName() != null || animal.getYears() != 0 || animal.getType() != null}">
     <a th:href="@{/people/animal/{id}(id=${animal.getId()})}">
         <p th:text="${'Имя:'+animal.getName() + ' ' + 'Возраст:'+animal.getYears() + ' ' + 'Тип:'+animal.getType}"></p></a></div>

@@ -2,6 +2,10 @@ package com.example.pr222.dao;
 
 
 import com.example.pr222.models.Sweet;
+import com.example.pr222.models.Sweet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
@@ -9,31 +13,34 @@ import java.util.ArrayList;
 import java.util.List;
 @Component
 public class SweetDAO {
-    private static int SWEET_COUNT = 0;
-    private List<Sweet> sweet;
-    {
-        sweet = new ArrayList<>();
-        sweet.add(new Sweet(++SWEET_COUNT, "Test", 1, "Шоколодная"));
-        sweet.add(new Sweet(++SWEET_COUNT, "Test2", 2, "Сосулька"));
-        sweet.add(new Sweet(++SWEET_COUNT, "Test3",3, "Фруктовая"));
-        sweet.add(new Sweet(++SWEET_COUNT, "Test4", 4, "Мармелад"));
+    private final JdbcTemplate jdbcTemplate;
+    @Autowired
+    public SweetDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
-    public List<Sweet> index(){
-        return sweet;
+    public List<Sweet> index() {
+
+        return jdbcTemplate.query("SELECT * FROM Sweet", new BeanPropertyRowMapper<>(Sweet.class));
     }
     public Sweet show(int id){
-        return sweet.stream().filter(_sweet -> _sweet.getId() == id).findAny().orElse(null);
+        return jdbcTemplate.query("SELECT * FROM Sweet WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Sweet.class))
+                .stream().findAny().orElse(null);
     }
-    public void save(Sweet _sweet){
-        _sweet.setId(++SWEET_COUNT);
-        sweet.add(_sweet);
+    public void save(Sweet sweet){
+//
+        jdbcTemplate.update("INSERT INTO Sweet(name, kolvo, type) VALUES(?, ?, ?)", sweet.getName(), sweet.getKolvo(), sweet.getType());
     }
     public void update(int id, Sweet updatedSweet){
-        Sweet sweetToBeUpdated = show(id);
-        sweetToBeUpdated.setName(updatedSweet.getName());
-        sweetToBeUpdated.setKolvo(updatedSweet.getKolvo());
-        sweetToBeUpdated.setType(updatedSweet.getType());
+
+        jdbcTemplate.update("UPDATE Sweet SET name=?, kolvo=?, type=? WHERE id=?", updatedSweet.getName(), updatedSweet.getKolvo(), updatedSweet.getType(), id);
     }
-    public void delete(int id){ Sweet sweetToDelete = show(id); if (sweetToDelete != null) { sweet.remove(sweetToDelete); }}
+    public void delete(int id){
+
+        jdbcTemplate.update("DELETE FROM Sweet WHERE id=?", id);
+    }
+    public List<Sweet> findByName(String name) {
+        String sql = "SELECT * FROM Sweet WHERE name = ?";
+        return jdbcTemplate.query(sql, new Object[]{name}, new BeanPropertyRowMapper<>(Sweet.class));
+    }
 }
 

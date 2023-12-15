@@ -1,9 +1,20 @@
 package com.example.pr222.models;
+import javax.persistence.*;
 
+import javax.validation.constraints.*;
+import javax.validation.constraints.NotEmpty;
 public class Team {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotEmpty(message = "Название команды не может быть пустым")
+    @Size(min = 2, max = 30, message = "Длина названия минимум 2 символа и максимум 30 символов")
     private String name;
+    @NotEmpty(message = "Тип команды не может быть пустым")
+    @Size(min = 2, max = 30, message = "Длина типа минимум 2 символа и максимум 30 символов")
     private String type;
+    @NotEmpty(message = "Название лиги не может быть пустым")
+    @Size(min = 2, max = 30, message = "Длина лиги минимум 2 символа и максимум 30 символов")
     private String league;
 
     public Team(){
